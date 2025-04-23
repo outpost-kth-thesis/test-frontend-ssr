@@ -1,12 +1,19 @@
 <script lang="ts">
-    function onFormSubmit(event: SubmitEvent) {
+    async function onFormSubmit(event: SubmitEvent) {
         event.preventDefault()
 
         const form = event.target as HTMLFormElement
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries())
         
-        console.log(data)
+        const apiUrl = "https://thesis-test-server.vercel.app"
+        const response = fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+        console.log(response)
     }
 </script>
 
@@ -19,6 +26,7 @@
                 <input
                     type="email"
                     name="email"
+                    defaultValue="samadder@email.com"
                     id="email"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
@@ -34,6 +42,7 @@
                 <input
                     type="password"
                     name="password"
+                    defaultValue="somepassword"
                     id="password"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
@@ -50,6 +59,7 @@
                     <input
                         type="text"
                         name="first_name"
+                        defaultValue="Praanto"
                         id="first_name"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
@@ -65,6 +75,7 @@
                     <input
                         type="text"
                         name="last_name"
+                        defaultValue="Samadder"
                         id="last_name"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
@@ -84,6 +95,7 @@
                         pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                         name="phone"
                         id="phone"
+                        defaultValue="0802234212"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
                         required
@@ -99,6 +111,7 @@
                         type="text"
                         name="company"
                         id="company"
+                        defaultValue="Outpost24"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                         placeholder=" "
                         required
