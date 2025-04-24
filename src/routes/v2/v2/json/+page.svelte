@@ -1,4 +1,6 @@
 <script lang="ts">
+    let printableResponse: string | undefined = undefined
+
     async function onFormSubmit(event: SubmitEvent) {
         event.preventDefault()
 
@@ -6,14 +8,11 @@
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries())
         
-        const apiUrl = "https://thesis-test-server.vercel.app"
-        const response = fetch(apiUrl, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
+        const apiUrl = "https://thesis-test-server.vercel.app/v2/json"
+        const response = await fetch(apiUrl, {
+            method: "GET"
         })
-        console.log(response)
+        printableResponse = JSON.stringify(await response.json())
     }
 </script>
 
@@ -129,6 +128,10 @@
                 >Submit</button
             >
         </form>
+
+        <form-response class="max-w-md block font-mono text-wrap break-all text-xs">
+            {printableResponse == undefined ? "" : printableResponse}
+        </form-response>
     </div>
     
 </page-root>
